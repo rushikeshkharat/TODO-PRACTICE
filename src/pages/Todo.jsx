@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import React from 'react'
 import * as yup from "yup"
+import axios from "axios";
 
 export default function Todo() {
     const formik = useFormik({
@@ -9,9 +10,6 @@ export default function Todo() {
             "task": "",
             "desc": "",
             "priority": "",
-            "mtask": "",
-            "mdesc": "",
-            "mpriority": "",
 
         },
         validationSchema: yup.object({
@@ -22,14 +20,43 @@ export default function Todo() {
                 .string().required("Enter the description"),
             priority: yup
                 .string().required("Choose the priority"),
+
+        }),
+        onSubmit: async (values, actions) => {
+            // await axios.post("http://localhost:3000/todo", values)
+            console.log(values);
+            actions.resetForm()
+
+        }
+    })
+    const mformik = useFormik({
+        initialValues:
+        {
+
+            "mtask": "",
+            "mdesc": "",
+            "mpriority": "",
+
+        },
+        validationSchema: yup.object({
+
+
             mtask: yup
                 .string().required("Enter new title for task"),
             mdesc: yup
                 .string().required("Enter new description"),
             mpriority: yup
                 .string().required("Choose the priority"),
-        })
+        }),
+        onSubmit: async (values) => {
+            //     await axios.post("http://localhost:3000/todo", values)
+            console.log(values);
+            //     actions.resetForm()
+
+        }
     })
+
+
     return (
         <div>
             <div className="container">
@@ -49,6 +76,7 @@ export default function Todo() {
                                             type="text"
                                             className="form-control"
                                             id="task"
+                                            name="task"
                                             onChange={formik.handleChange}
                                             value={formik.values.task}
                                             placeholder="Enter Your task"
@@ -62,6 +90,7 @@ export default function Todo() {
                                             type="text"
                                             className="form-control"
                                             id="desc"
+                                            name='desc'
                                             onChange={formik.handleChange}
                                             value={formik.values.desc}
                                             placeholder="Enter task description"
@@ -72,6 +101,7 @@ export default function Todo() {
                                     <div className="mt-2">
                                         <label for="priority"> Priority</label>
                                         <select className="form-select" id="priority"
+                                            name='priority'
                                             onChange={formik.handleChange}
                                             value={formik.values.priority}>
                                             <option selected>Select Priority</option>
@@ -133,17 +163,18 @@ export default function Todo() {
                         </div>
                         <div className="modal-body">
                             {
-                                JSON.stringify(formik.errors)
+                                JSON.stringify(mformik.errors)
                             }
-                            <form onSubmit={formik.handleSubmit}>
+                            <form onSubmit={mformik.handleSubmit}>
                                 <div>
                                     <label for="mtask" className="form-label">First task</label>
                                     <input
                                         type="text"
                                         className="form-control"
                                         id="mtask"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.mtask}
+                                        name="mtask"
+                                        onChange={mformik.handleChange}
+                                        value={mformik.values.mtask}
                                         placeholder="Enter Your task"
                                     />
                                     <div className="valid-feedback">Looks good!</div>
@@ -155,8 +186,9 @@ export default function Todo() {
                                         type="text"
                                         className="form-control"
                                         id="mdesc"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.mdesc}
+                                        name="mdesc"
+                                        onChange={mformik.handleChange}
+                                        value={mformik.values.mdesc}
                                         placeholder="Enter task description"
                                     />
                                     <div className="valid-feedback">Looks good!</div>
@@ -166,8 +198,9 @@ export default function Todo() {
                                     <label for="mpriority"> Priority</label>
                                     <select className="form-select"
                                         id="mpriority"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.desc}
+                                        name="mpriority"
+                                        onChange={mformik.handleChange}
+                                        value={mformik.values.desc}
                                     >
                                         <option selected>Select Priority</option>
                                         <option value="high">High</option>
@@ -175,19 +208,19 @@ export default function Todo() {
                                         <option value="low">Low</option>
                                     </select>
                                 </div>
-                            </form>
-                            <button type="submit" className="btn btn-primary w-100 mt-3"
-                            >
-                                Update Todo
-                            </button>
-                            <button
-                                type="button"
-                                className="btn mt-2 w-100 btn-outline-secondary"
-                                data-bs-dismiss="modal"
+                                <button type="submit" className="btn btn-primary w-100 mt-3"
+                                >
+                                    Update Todo
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn mt-2 w-100 btn-outline-secondary"
+                                    data-bs-dismiss="modal"
 
-                            >
-                                Close
-                            </button>
+                                >
+                                    Close
+                                </button>
+                            </form>
 
                         </div>
                     </div>
