@@ -9,6 +9,10 @@ export default function Todo() {
             "task": "",
             "desc": "",
             "priority": "",
+            "mtask": "",
+            "mdesc": "",
+            "mpriority": "",
+
         },
         validationSchema: yup.object({
 
@@ -17,6 +21,12 @@ export default function Todo() {
             desc: yup
                 .string().required("Enter the description"),
             priority: yup
+                .string().required("Choose the priority"),
+            mtask: yup
+                .string().required("Enter new title for task"),
+            mdesc: yup
+                .string().required("Enter new description"),
+            mpriority: yup
                 .string().required("Choose the priority"),
         })
     })
@@ -30,47 +40,50 @@ export default function Todo() {
                     <div className="col-sm-6 offset-sm-3">
                         <div className="card">
                             <div className="card-header">Todo</div>
+
                             <div className="card-body">
-                                <div>
-                                    <label for="task" className="form-label">First task</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="task"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.task}
-                                        placeholder="Enter Your task"
-                                    />
-                                    <div className="valid-feedback">Looks good!</div>
-                                    <div className="invalid-feedback">Please add task.</div>
-                                </div>
-                                <div className="mt-2">
-                                    <label for="desc" className="form-label">Description</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="desc"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.desc}
-                                        placeholder="Enter task description"
-                                    />
-                                    <div className="valid-feedback">Looks good!</div>
-                                    <div className="invalid-feedback">Please add description</div>
-                                </div>
-                                <div className="mt-2">
-                                    <label for="priority"> Priority</label>
-                                    <select className="form-select" id="priority"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.priority}>
-                                        <option selected>Select Priority</option>
-                                        <option value="high">High</option>
-                                        <option value="medium">Medium</option>
-                                        <option value="low">Low</option>
-                                    </select>
-                                </div>
-                                <button type="button" className="btn btn-primary w-100 mt-3">
-                                    Add Todo
-                                </button>
+                                <form onSubmit={formik.handleSubmit}>
+                                    <div>
+                                        <label for="task" className="form-label">First task</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="task"
+                                            onChange={formik.handleChange}
+                                            value={formik.values.task}
+                                            placeholder="Enter Your task"
+                                        />
+                                        <div className="valid-feedback">Looks good!</div>
+                                        <div className="invalid-feedback">Please add task.</div>
+                                    </div>
+                                    <div className="mt-2">
+                                        <label for="desc" className="form-label">Description</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="desc"
+                                            onChange={formik.handleChange}
+                                            value={formik.values.desc}
+                                            placeholder="Enter task description"
+                                        />
+                                        <div className="valid-feedback">Looks good!</div>
+                                        <div className="invalid-feedback">Please add description</div>
+                                    </div>
+                                    <div className="mt-2">
+                                        <label for="priority"> Priority</label>
+                                        <select className="form-select" id="priority"
+                                            onChange={formik.handleChange}
+                                            value={formik.values.priority}>
+                                            <option selected>Select Priority</option>
+                                            <option value="high">High</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="low">Low</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" className="btn btn-primary w-100 mt-3">
+                                        Add Todo
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         <div className="card mt-4">
@@ -119,47 +132,63 @@ export default function Todo() {
                             ></button>
                         </div>
                         <div className="modal-body">
-                            <div>
-                                <label for="mtask" className="form-label">First task</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="mtask"
-                                    placeholder="Enter Your task"
-                                />
-                                <div className="valid-feedback">Looks good!</div>
-                                <div className="invalid-feedback">Please add task.</div>
-                            </div>
-                            <div className="mt-2">
-                                <label for="mdesc" className="form-label">Description</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="mdesc"
-                                    placeholder="Enter task description"
-                                />
-                                <div className="valid-feedback">Looks good!</div>
-                                <div className="invalid-feedback">Please add description</div>
-                            </div>
-                            <div className="mt-2">
-                                <label for="mpriority"> Priority</label>
-                                <select className="form-select" id="mpriority">
-                                    <option selected>Select Priority</option>
-                                    <option value="high">High</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="low">Low</option>
-                                </select>
-                            </div>
-                            <button type="button" className="btn btn-primary w-100 mt-3">
+                            {
+                                JSON.stringify(formik.errors)
+                            }
+                            <form onSubmit={formik.handleSubmit}>
+                                <div>
+                                    <label for="mtask" className="form-label">First task</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="mtask"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.mtask}
+                                        placeholder="Enter Your task"
+                                    />
+                                    <div className="valid-feedback">Looks good!</div>
+                                    <div className="invalid-feedback">Please add task.</div>
+                                </div>
+                                <div className="mt-2">
+                                    <label for="mdesc" className="form-label">Description</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="mdesc"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.mdesc}
+                                        placeholder="Enter task description"
+                                    />
+                                    <div className="valid-feedback">Looks good!</div>
+                                    <div className="invalid-feedback">Please add description</div>
+                                </div>
+                                <div className="mt-2">
+                                    <label for="mpriority"> Priority</label>
+                                    <select className="form-select"
+                                        id="mpriority"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.desc}
+                                    >
+                                        <option selected>Select Priority</option>
+                                        <option value="high">High</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
+                                    </select>
+                                </div>
+                            </form>
+                            <button type="submit" className="btn btn-primary w-100 mt-3"
+                            >
                                 Update Todo
                             </button>
                             <button
                                 type="button"
                                 className="btn mt-2 w-100 btn-outline-secondary"
                                 data-bs-dismiss="modal"
+
                             >
                                 Close
                             </button>
+
                         </div>
                     </div>
                 </div>
