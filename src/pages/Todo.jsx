@@ -71,10 +71,16 @@ export default function Todo() {
                             <div className="card-body">
                                 <form onSubmit={formik.handleSubmit}>
                                     <div>
-                                        <label for="task" className="form-label">First task</label>
+                                        <label
+                                            for="task"
+                                            className="form-label">First task</label>
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className={
+                                                formik.errors.name
+                                                    ? "form-control is-invalid"
+                                                    : "form-control"
+                                            }
                                             id="task"
                                             name="task"
                                             onChange={formik.handleChange}
@@ -88,7 +94,11 @@ export default function Todo() {
                                         <label for="desc" className="form-label">Description</label>
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className={
+                                                formik.errors.name
+                                                    ? "form-control is-invalid"
+                                                    : "form-control"
+                                            }
                                             id="desc"
                                             name='desc'
                                             onChange={formik.handleChange}
@@ -170,7 +180,11 @@ export default function Todo() {
                                     <label for="mtask" className="form-label">First task</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={
+                                            formik.errors.name
+                                                ? "form-control is-invalid"
+                                                : "form-control"
+                                        }
                                         id="mtask"
                                         name="mtask"
                                         onChange={mformik.handleChange}
@@ -184,7 +198,11 @@ export default function Todo() {
                                     <label for="mdesc" className="form-label">Description</label>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className={
+                                            formik.errors.name
+                                                ? "form-control is-invalid"
+                                                : "form-control"
+                                        }
                                         id="mdesc"
                                         name="mdesc"
                                         onChange={mformik.handleChange}
@@ -195,7 +213,7 @@ export default function Todo() {
                                     <div className="invalid-feedback">Please add description</div>
                                 </div>
                                 <div className="mt-2">
-                                    <label for="mpriority"> Priority</label>
+                                    <label for="mpriority">Priority</label>
                                     <select className="form-select"
                                         id="mpriority"
                                         name="mpriority"

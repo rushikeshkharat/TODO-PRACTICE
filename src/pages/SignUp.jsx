@@ -46,10 +46,14 @@ export default function SignUp() {
                                 <label for="name" className="form-label">Name</label>
                                 <input
                                     type="text"
-                                    className="form-control"
                                     id="name"
                                     onChange={formik.handleChange}
                                     value={formik.values.name}
+                                    className={
+                                        formik.errors.name
+                                            ? "form-control is-invalid"
+                                            : "form-control"
+                                    }
                                     placeholder="Enter your name"
                                 />
                                 <div className="valid-feedback">Looks good!</div>
@@ -59,7 +63,11 @@ export default function SignUp() {
                                 <label for="email" className="form-label">Email</label>
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className={
+                                        formik.errors.name
+                                            ? "form-control is-invalid"
+                                            : "form-control"
+                                    }
                                     id="email"
                                     onChange={formik.handleChange}
                                     value={formik.values.email}
@@ -72,7 +80,11 @@ export default function SignUp() {
                                 <label for="password" className="form-label">Password</label>
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className={
+                                        formik.errors.name
+                                            ? "form-control is-invalid"
+                                            : "form-control"
+                                    }
                                     id="password"
                                     onChange={formik.handleChange}
                                     value={formik.values.password}
@@ -87,7 +99,11 @@ export default function SignUp() {
                                 >
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className={
+                                        formik.errors.name
+                                            ? "form-control is-invalid"
+                                            : "form-control"
+                                    }
                                     id="cpassword"
                                     onChange={formik.handleChange}
                                     value={formik.values.cpassword}
